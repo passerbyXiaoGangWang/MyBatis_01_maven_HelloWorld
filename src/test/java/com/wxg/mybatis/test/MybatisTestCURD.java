@@ -12,7 +12,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
-public class MybatisTest {
+/**
+ * 测试Mybatis单表增删改查
+ */
+public class MybatisTestCURD {
     public SqlSessionFactory getSqlSessionFactory() throws IOException {
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
@@ -36,6 +39,10 @@ public class MybatisTest {
         }
     }
 
+    /**
+     * 根据id查询员工
+     * @throws IOException
+     */
     @Test
     public void test02() throws IOException {
         SqlSessionFactory sqlSessionFactory = this.getSqlSessionFactory();
@@ -51,6 +58,10 @@ public class MybatisTest {
 
     }
 
+    /**
+     * 测试结果封装为Map对象
+     * @throws IOException
+     */
     @Test
     public void test03() throws IOException {
         SqlSessionFactory sqlSessionFactory = this.getSqlSessionFactory();
@@ -67,6 +78,10 @@ public class MybatisTest {
 
     }
 
+    /**
+     * 测试新增员工
+     * @throws IOException
+     */
     @Test
     public void test04() throws IOException {
         SqlSessionFactory sqlSessionFactory = this.getSqlSessionFactory();
@@ -87,6 +102,10 @@ public class MybatisTest {
 
     }
 
+    /**
+     * 测试修改员工，根据主键id
+     * @throws IOException
+     */
     @Test
     public void test05() throws IOException {
         SqlSessionFactory sqlSessionFactory = this.getSqlSessionFactory();
@@ -95,7 +114,7 @@ public class MybatisTest {
         try {
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
             Employee employee = new Employee();
-            employee.setId(4);
+            employee.setId(5);
             employee.setLastName("Jason_update");
             employee.setGender("0");
             employee.setEmail("jason_update@163.com");
@@ -108,6 +127,10 @@ public class MybatisTest {
 
     }
 
+    /**
+     * 根据主键id删除员工
+     * @throws IOException
+     */
     @Test
     public void test06() throws IOException {
         SqlSessionFactory sqlSessionFactory = this.getSqlSessionFactory();
@@ -115,7 +138,7 @@ public class MybatisTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
-            mapper.deleteEmp(4);
+            mapper.deleteEmpById(4);
             sqlSession.commit();
         }finally {
             sqlSession.close();

@@ -24,7 +24,7 @@
         where id = #{id}
     </update>
 
-    <delete id="deleteEmp" parameterType="int">
+    <delete id="deleteEmpById" parameterType="int">
         delete from tbl_employee where id = #{id}
     </delete>
 

@@ -9,6 +9,12 @@ public interface EmployeeMapper {
 
 
     public Employee getEmpById(Integer id);
+
+    /**
+     * 结果封装为Map对象
+     * @param id
+     * @return
+     */
     public HashMap<String,Object> selectEmp(Integer id);
 
     /**
@@ -27,5 +33,5 @@ public interface EmployeeMapper {
      * 删除员工
      * @param id
      */
-    public void deleteEmp(Integer id);
+    public void deleteEmpById(Integer id);
 }
