@@ -1,10 +1,13 @@
 package com.wxg.mybatis.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Department implements Serializable {
     private Integer id;
     private String departmentName;
+
+    private List<Employee> emps;
 
     public Department() {
     }
@@ -12,6 +15,14 @@ public class Department implements Serializable {
     public Department(Integer id, String departmentName) {
         this.id = id;
         this.departmentName = departmentName;
+    }
+
+    public List<Employee> getEmps() {
+        return emps;
+    }
+
+    public void setEmps(List<Employee> emps) {
+        this.emps = emps;
     }
 
     public Integer getId() {

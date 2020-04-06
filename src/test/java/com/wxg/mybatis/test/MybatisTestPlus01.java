@@ -81,7 +81,7 @@ public class MybatisTestPlus01 {
             EmployeeMapperPlus mapper = sqlSession.getMapper(EmployeeMapperPlus.class);
             Employee employee = mapper.getEmpByIdStep(1);
             System.out.println(employee.getLastName());
-//            System.out.println(employee.getDept());
+            System.out.println(employee.getDept());
         }finally {
             sqlSession.close();
         }
