@@ -1,6 +1,7 @@
 package com.wxg.mybatis.mapper;
 
 import com.wxg.mybatis.bean.Employee;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;
@@ -8,7 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 public interface EmployeeMapper {
+    //多条记录封装一个map:Map<Integer,Employee>:键是这条记录的主键，值是记录封装后的javaBean对象
+    //告诉mybatis封装这个map的时候使用哪个属性作为map的key
+    @MapKey("id")
+//    @MapKey("lastName")
+    public Map<Integer,Employee> getEmpByLastNameLikeReturnMap(String lastName);
 
+    //返回一条记录的map；key就是列名，值就是对应的值
+    public Map<String,Object> getEmpByIdReturnMap(Integer id);
 
     /**
      * 通过姓名模糊查询，返回结果为List
