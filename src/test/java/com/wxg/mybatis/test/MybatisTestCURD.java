@@ -94,10 +94,10 @@ public class MybatisTestCURD {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
-            Employee employee = new Employee();
-            employee.setLastName("Jason");
-            employee.setGender("1");
-            employee.setEmail("jason@163.com");
+            Employee employee = new Employee(null,"jerry","jerry@163.com","1");
+//            employee.setLastName("Jason");
+//            employee.setGender("1");
+//            employee.setEmail("jason@163.com");
             mapper.addEmployee(employee);
             System.out.println(employee);
             sqlSession.commit(); //手动提交
@@ -118,12 +118,9 @@ public class MybatisTestCURD {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
-            Employee employee = new Employee();
-            employee.setId(5);
-            employee.setLastName("Jason_update");
-            employee.setGender("0");
-            employee.setEmail("jason_update@163.com");
-            mapper.updateEmp(employee);
+            Employee employee = new Employee(7,"jerry_update","jerry_update@163.com","1");
+            boolean flag = mapper.updateEmp(employee);
+            System.out.println(flag);
             System.out.println(employee);
             sqlSession.commit();//手动提交
         }finally {

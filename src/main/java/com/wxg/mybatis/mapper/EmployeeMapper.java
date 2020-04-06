@@ -21,13 +21,13 @@ public interface EmployeeMapper {
      * 添加员工
      * @param employee
      */
-    public void addEmployee(Employee employee);
+    public Long addEmployee(Employee employee);
 
     /**
      * 修改员工
      * @param employee
      */
-    public void updateEmp(Employee employee);
+    public boolean updateEmp(Employee employee);
 
     /**
      * 删除员工
