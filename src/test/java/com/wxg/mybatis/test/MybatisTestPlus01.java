@@ -20,6 +20,7 @@ import java.util.Map;
 public class MybatisTestPlus01 {
 
     /**
+     * 查询员工信息的同时查询部门信息
      * 测试简单的resultMap封装单表查询结果集
      * @throws IOException
      */
@@ -39,6 +40,7 @@ public class MybatisTestPlus01 {
     }
 
     /**
+     * 查询员工信息的同时查询部门信息
      * 测试复杂的resultMap封装多表 连接查询 的结果集
      * @throws IOException
      */
@@ -51,6 +53,27 @@ public class MybatisTestPlus01 {
             EmployeeMapperPlus mapper = sqlSession.getMapper(EmployeeMapperPlus.class);
             Employee employee = mapper.getEmpAndDept(1);
             System.out.println(employee);
+            System.out.println(employee.getDept());
+        }finally {
+            sqlSession.close();
+        }
+
+    }
+
+    /**
+     * 查询员工信息的同时查询部门信息
+     * 使用association进行分步查询
+     * @throws IOException
+     */
+    @Test
+    public void test03() throws IOException {
+        SqlSessionFactory sqlSessionFactory = this.getSqlSessionFactory();
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            EmployeeMapperPlus mapper = sqlSession.getMapper(EmployeeMapperPlus.class);
+            Employee employee = mapper.getEmpByIdStep(1);
+            System.out.println(employee.getLastName());
             System.out.println(employee.getDept());
         }finally {
             sqlSession.close();
