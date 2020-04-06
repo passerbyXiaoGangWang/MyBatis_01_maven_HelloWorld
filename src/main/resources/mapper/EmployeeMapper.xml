@@ -18,7 +18,7 @@
 		keyProperty；指定对应的主键属性，也就是mybatis获取到主键值以后，将这个值封装给javaBean的哪个属性
 	-->
     <!-- public void addEmployee(Employee employee);   -->
-    <insert id="addEmployee" useGeneratedKeys="true" keyProperty="id" parameterType="com.wxg.mybatis.bean.Employee">
+    <insert id="addEmployee" useGeneratedKeys="true" keyProperty="id" parameterType="com.wxg.mybatis.bean.Employee" databaseId="mysql">
         insert into tbl_employee (last_name,gender,email)
         values (#{lastName},#{gender},#{email})
     </insert>
