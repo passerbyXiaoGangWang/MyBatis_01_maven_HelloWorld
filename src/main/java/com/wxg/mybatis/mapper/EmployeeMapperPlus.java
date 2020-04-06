@@ -9,4 +9,7 @@ public interface EmployeeMapperPlus {
     //查询员工的同时查询该员工的部门信息
     public Employee getEmpAndDept(Integer id);
 
+    //使用association进行分步查询
+    public Employee getEmpByIdStep(Integer id);
+
 }
