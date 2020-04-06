@@ -94,7 +94,7 @@ public class MybatisTestCURD {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
-            Employee employee = new Employee(null,"jerry","jerry@163.com","1");
+            Employee employee = new Employee(null,"jerry2","jerry2@163.com","0");
 //            employee.setLastName("Jason");
 //            employee.setGender("1");
 //            employee.setEmail("jason@163.com");
