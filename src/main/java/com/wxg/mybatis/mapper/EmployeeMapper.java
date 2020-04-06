@@ -4,8 +4,16 @@ import com.wxg.mybatis.bean.Employee;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public interface EmployeeMapper {
+
+    /**
+     * 查询时多个参数使用Map封装
+     * @param map
+     * @return
+     */
+    public Employee getEmpByMap(Map<String,Object> map);
 
 
     /**
