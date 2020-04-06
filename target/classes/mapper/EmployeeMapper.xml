@@ -3,22 +3,33 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wxg.mybatis.mapper.EmployeeMapper">
-    <select id="getEmpById" resultType="employee">
-        select id,last_name,email,gender from tbl_employee where id = #{id}
-    </select>
 
-    <select id="selectEmp" parameterType="int" resultType="hashmap">
-        SELECT * FROM tbl_employee WHERE id = #{id}
-    </select>
+<!-- public Employee getEmpByIdAndLastName(Integer id,String lastName);   -->
+    <select id="getEmpByIdAndLastName" resultType="com.wxg.mybatis.bean.Employee">
+    <!--SELECT * FROM tbl_employee WHERE id = #{param1} and last_name = #{param2}-->
 
-    <!-- parameterType：参数类型，可以省略，
-	获取自增主键的值：
-		mysql支持自增主键，自增主键值的获取，mybatis也是利用statement.getGenreatedKeys()；
-		useGeneratedKeys="true"；使用自增主键获取主键值策略
-		keyProperty；指定对应的主键属性，也就是mybatis获取到主键值以后，将这个值封装给javaBean的哪个属性
-	-->
+    <!-- 接口方法参数上使用注解@Param指定参数名
+    @Param("id") Integer id, @Param("lastName") String lastName
+    -->
+    SELECT * FROM tbl_employee WHERE id = #{id} and last_name = #{lastName}
+</select>
+    
+<select id="getEmpById" resultType="employee">
+    select id,last_name,email,gender from tbl_employee where id = #{id}
+</select>
+
+<select id="selectEmp" parameterType="int" resultType="hashmap">
+    SELECT * FROM tbl_employee WHERE id = #{id}
+</select>
+
+<!-- parameterType：参数类型，可以省略，
+获取自增主键的值：
+    mysql支持自增主键，自增主键值的获取，mybatis也是利用statement.getGenreatedKeys()；
+    useGeneratedKeys="true"；使用自增主键获取主键值策略
+    keyProperty；指定对应的主键属性，也就是mybatis获取到主键值以后，将这个值封装给javaBean的哪个属性
+-->
     <!-- public void addEmployee(Employee employee);   -->
-    <insert id="addEmployee" useGeneratedKeys="true" keyProperty="id" parameterType="com.wxg.mybatis.bean.Employee">
+    <insert id="addEmployee" useGeneratedKeys="true" keyProperty="id" parameterType="com.wxg.mybatis.bean.Employee" databaseId="mysql">
         insert into tbl_employee (last_name,gender,email)
         values (#{lastName},#{gender},#{email})
     </insert>

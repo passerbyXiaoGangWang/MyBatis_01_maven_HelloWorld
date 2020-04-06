@@ -1,11 +1,27 @@
 package com.wxg.mybatis.mapper;
 
 import com.wxg.mybatis.bean.Employee;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;
 
 public interface EmployeeMapper {
 
+
+    /**
+     * 测试Mybatis多个参数查询
+     *
+     * 【命名参数】：明确指定封装参数时map的key；@Param("id")
+     * 	多个参数会被封装成 一个map，
+     * 		key：使用@Param注解指定的值
+     * 		value：参数值
+     * 	#{指定的key}取出对应的参数值
+     *
+     * @param id
+     * @param lastName
+     * @return
+     */
+    public Employee getEmpByIdAndLastName(@Param("id") Integer id, @Param("lastName") String lastName);
 
 
     public Employee getEmpById(Integer id);
