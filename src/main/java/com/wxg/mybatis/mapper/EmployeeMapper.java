@@ -4,9 +4,18 @@ import com.wxg.mybatis.bean.Employee;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public interface EmployeeMapper {
+
+
+    /**
+     * 通过姓名模糊查询，返回结果为List
+     * @param lastName
+     * @return
+     */
+    public List<Employee> getEmpsByLastNameLike(String lastName);
 
     /**
      * 查询时多个参数使用Map封装
@@ -14,7 +23,6 @@ public interface EmployeeMapper {
      * @return
      */
     public Employee getEmpByMap(Map<String,Object> map);
-
 
     /**
      * 测试Mybatis多个参数查询
