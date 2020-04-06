@@ -36,5 +36,43 @@
 		id  last_name  gender    d_id     did  dept_name (private Department dept;)
 	 -->
 
+    <!--
+		联合查询：级联属性封装结果集
+	  -->
+    <resultMap id="MyDifEmp" type="com.wxg.mybatis.bean.Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="lastName"/>
+        <result column="gender" property="gender"/>
+        <result column="email" property="email"/>
+        <result column="d_id" property="dId"/>
+        <result column="did" property="dept.id"/>
+        <result column="department_name" property="dept.departmentName"/>
+    </resultMap>
+
+    <!--
+		使用association定义关联的单个对象的封装规则；
+	 -->
+    <resultMap id="MyDifEmp2" type="com.wxg.mybatis.bean.Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="lastName"/>
+        <result column="gender" property="gender"/>
+        <result column="email" property="email"/>
+        <result column="d_id" property="dId"/>
+        <!--  association可以指定联合的javaBean对象
+		property="dept"：指定哪个属性是联合的对象
+		javaType:指定这个属性对象的类型[不能省略]
+		-->
+        <association property="dept" javaType="com.wxg.mybatis.bean.Department">
+            <id column="did" property="id"/>
+            <result column="department_name" property="departmentName"/>
+        </association>
+    </resultMap>
+    <!-- public Employee getEmpAndDept(Integer id);   -->
+    <select id="getEmpAndDept" resultMap="MyDifEmp2">
+        SELECT e.*,d.id as did,d.department_name FROM tbl_employee e
+        INNER JOIN department d
+        ON e.d_id = d.id
+        WHERE e.id = #{id}
+    </select>
 
 </mapper>

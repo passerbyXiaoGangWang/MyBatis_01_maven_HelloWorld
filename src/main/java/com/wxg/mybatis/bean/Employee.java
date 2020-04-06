@@ -7,8 +7,17 @@ public class Employee implements Serializable {
     private String lastName;
     private String email;
     private String gender;
+    private Integer dId; //部门编号
 
     private Department dept;
+
+    public Integer getdId() {
+        return dId;
+    }
+
+    public void setdId(Integer dId) {
+        this.dId = dId;
+    }
 
     public Department getDept() {
         return dept;
@@ -67,6 +76,8 @@ public class Employee implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", gender='" + gender + '\'' +
+                ", dId=" + dId +
+                ", dept=" + dept +
                 '}';
     }
 }
