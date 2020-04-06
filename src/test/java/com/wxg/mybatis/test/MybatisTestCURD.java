@@ -14,6 +14,11 @@ import java.util.HashMap;
 
 /**
  * 测试Mybatis单表增删改查
+ * 1、mybatis允许增删改直接定义以下类型返回值
+ *  		Integer、Long、Boolean、void
+ * 	 2、我们需要手动提交数据
+ * 	  		sqlSessionFactory.openSession();===》手动提交
+ * 	  		sqlSessionFactory.openSession(true);===》自动提交
  */
 public class MybatisTestCURD {
     public SqlSessionFactory getSqlSessionFactory() throws IOException {
@@ -85,7 +90,7 @@ public class MybatisTestCURD {
     @Test
     public void test04() throws IOException {
         SqlSessionFactory sqlSessionFactory = this.getSqlSessionFactory();
-
+        //1、获取到的SqlSession不会自动提交数据
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
@@ -95,7 +100,7 @@ public class MybatisTestCURD {
             employee.setEmail("jason@163.com");
             mapper.addEmployee(employee);
             System.out.println(employee);
-            sqlSession.commit();
+            sqlSession.commit(); //手动提交
         }finally {
             sqlSession.close();
         }
@@ -109,7 +114,7 @@ public class MybatisTestCURD {
     @Test
     public void test05() throws IOException {
         SqlSessionFactory sqlSessionFactory = this.getSqlSessionFactory();
-
+        //1、获取到的SqlSession不会自动提交数据
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
@@ -120,7 +125,7 @@ public class MybatisTestCURD {
             employee.setEmail("jason_update@163.com");
             mapper.updateEmp(employee);
             System.out.println(employee);
-            sqlSession.commit();
+            sqlSession.commit();//手动提交
         }finally {
             sqlSession.close();
         }
@@ -135,11 +140,12 @@ public class MybatisTestCURD {
     public void test06() throws IOException {
         SqlSessionFactory sqlSessionFactory = this.getSqlSessionFactory();
 
+        //1、获取到的SqlSession不会自动提交数据
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
             mapper.deleteEmpById(4);
-            sqlSession.commit();
+            sqlSession.commit();//手动提交
         }finally {
             sqlSession.close();
         }
